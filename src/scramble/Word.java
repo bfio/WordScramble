@@ -38,7 +38,5 @@ public class Word implements Scrambler {
 	private int calculateValue(String phrase) {
 		return Scrambler.calculateValue(phrase);
 	}
-	
-	
 
 }
