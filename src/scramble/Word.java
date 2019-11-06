@@ -16,6 +16,24 @@ public class Word implements Scrambler {
 		this.value = this.calculateValue(phrase);
 	}
 	
+	/**
+	 * Scrambles a phrase through Scrambler interface
+	 * @param phrase Word to be scrambled
+	 * @return String value of the scrambled phrase
+	 */
+	private String scramblePhrase(String phrase) {
+		return Scrambler.scrambleWord(phrase);
+	}
+	
+	/**
+	 * Calculates point value for a phrase
+	 * @param phrase String used to determine value
+	 * @return int value of points to be added/deducted from score
+	 */
+	private int calculateValue(String phrase) {
+		return Scrambler.calculateValue(phrase);
+	}
+	
 	//Getters and Setters
 	protected String getPhrase() {
 		return phrase;
@@ -32,11 +50,6 @@ public class Word implements Scrambler {
 	protected void setValue(int value) {
 		this.value = value;
 	}
-	private String scramblePhrase(String phrase) {
-		return Scrambler.scrambleWord(phrase);
-	}
-	private int calculateValue(String phrase) {
-		return Scrambler.calculateValue(phrase);
-	}
+
 
 }
