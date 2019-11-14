@@ -14,6 +14,7 @@ import javafx.util.Duration;
 public class WordScrambleGame extends Application {
 
 	private static Stage primaryStage;
+	private static Difficulty difficulty;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -48,5 +49,8 @@ public class WordScrambleGame extends Application {
 		clock.play();
 	}
 
+	private static void setDifficulty(Difficulty difficulty) {
+		WordScrambleGame.difficulty = difficulty;
+	}
 }
 
