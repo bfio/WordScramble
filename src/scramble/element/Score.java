@@ -1,4 +1,4 @@
-package scramble;
+package scramble.element;
 
 public class Score {
 	

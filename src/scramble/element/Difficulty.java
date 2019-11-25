@@ -1,4 +1,4 @@
-package scramble;
+package scramble.element;
 
 public enum Difficulty {
 	EASY("Easy", "Good for new players with less experience"), 

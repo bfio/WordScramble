@@ -1,4 +1,8 @@
-package scramble;
+package scramble.controller;
+
+import scramble.WordScrambleGame;
+import scramble.element.Difficulty;
+import scramble.element.User;
 
 public class StartupController {
 	

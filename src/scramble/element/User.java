@@ -1,4 +1,4 @@
-package scramble;
+package scramble.element;
 
 import java.util.ArrayList;
 import java.util.List;

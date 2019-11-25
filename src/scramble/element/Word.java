@@ -1,4 +1,6 @@
-package scramble;
+package scramble.element;
+
+import scramble.Scrambler;
 
 public class Word implements Scrambler {
 	

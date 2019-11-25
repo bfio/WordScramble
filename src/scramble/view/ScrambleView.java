@@ -1,4 +1,4 @@
-package scramble;
+package scramble.view;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import scramble.WordScrambleGame;
 
 public class ScrambleView extends Stage {
 	

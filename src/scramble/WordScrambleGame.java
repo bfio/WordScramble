@@ -1,15 +1,11 @@
 package scramble;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import scramble.element.Difficulty;
+import scramble.element.User;
+import scramble.view.StartupView;
 
 public class WordScrambleGame extends Application {
 
@@ -37,8 +33,12 @@ public class WordScrambleGame extends Application {
 	public static void changeScene(Scene scene) {
 		WordScrambleGame.primaryStage.setScene(scene);
 	}
+	
+	public static Difficulty getCurrentDifficulty() {
+		return WordScrambleGame.currentDifficulty;
+	}
 
-	protected static void setCurrentDifficulty(Difficulty difficulty) {
+	public static void setCurrentDifficulty(Difficulty difficulty) {
 		WordScrambleGame.currentDifficulty = difficulty;
 	}
 

@@ -1,4 +1,4 @@
-package scramble;
+package scramble.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import scramble.WordScrambleGame;
+import scramble.controller.StartupController;
+import scramble.element.Difficulty;
+import scramble.element.User;
 
 public class StartupView {
 
@@ -80,7 +84,7 @@ public class StartupView {
 		return scene;
 	}
 	
-	protected static String getStartupViewTitle() {
+	public static String getStartupViewTitle() {
 		return startupViewTitle;
 	}
 	
