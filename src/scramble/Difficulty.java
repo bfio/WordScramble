@@ -15,7 +15,7 @@ public enum Difficulty {
 	
 	@Override
 	public String toString() {
-		return description;
+		return name;
 	}
 	
 }

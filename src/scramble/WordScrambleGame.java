@@ -14,7 +14,8 @@ import javafx.util.Duration;
 public class WordScrambleGame extends Application {
 
 	private static Stage primaryStage;
-	private static Difficulty difficulty;
+	private static Difficulty currentDifficulty;
+	private static User currentUser;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -37,20 +38,16 @@ public class WordScrambleGame extends Application {
 		WordScrambleGame.primaryStage.setScene(scene);
 	}
 
-	/**
-	 * An animated clock in the title bar of the main window.
-	 */
-	private void initClock() {
-		Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd h:mm:ss a");
-			primaryStage.setTitle("CPS 240 Bank - " + LocalDateTime.now().format(formatter));
-		}), new KeyFrame(Duration.seconds(1)));
-		clock.setCycleCount(Animation.INDEFINITE);
-		clock.play();
+	protected static void setCurrentDifficulty(Difficulty difficulty) {
+		WordScrambleGame.currentDifficulty = difficulty;
 	}
 
-	private static void setDifficulty(Difficulty difficulty) {
-		WordScrambleGame.difficulty = difficulty;
+	public static User getCurrentUser() {
+		return currentUser;
+	}
+
+	public static void setCurrentUser(User currentUser) {
+		WordScrambleGame.currentUser = currentUser;
 	}
 }
 
