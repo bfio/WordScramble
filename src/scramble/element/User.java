@@ -1,8 +1,5 @@
 package scramble.element;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
 	
 	private char[] initials;
@@ -19,6 +16,10 @@ public class User {
 
 	protected void setInitials(char[] initials) {
 		this.initials = initials;
+	}
+	
+	protected void setInitials(String name) {
+		this.setInitials(name.substring(0, 3).toCharArray());
 	}
 	
 	
