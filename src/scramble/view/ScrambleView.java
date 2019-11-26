@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import scramble.WordScrambleGame;
+import scramble.element.CountdownTimer;
 
 public class ScrambleView extends Stage {
 	
@@ -24,8 +25,6 @@ public class ScrambleView extends Stage {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
-		
-		
 		
 		Text score = new Text("Score Placeholder Here");
 		
@@ -78,6 +77,7 @@ public class ScrambleView extends Stage {
 		grid.setAlignment(Pos.CENTER);
 
 		Button timer = new Button("Timer Placeholder");
+		
 		grid.add(timer, 0, 0);
 		Button score = new Button("Score Placeholder");
 		grid.add(score, 3, 0);
