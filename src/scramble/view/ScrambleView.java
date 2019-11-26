@@ -1,17 +1,22 @@
 package scramble.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import scramble.WordScrambleGame;
+import scramble.controller.ScrambleController;
 import scramble.element.CountdownTimer;
 
 public class ScrambleView extends Stage {
@@ -84,6 +89,14 @@ public class ScrambleView extends Stage {
 		Label scrambled = new Label("Scrambled here");
 		grid.add(scrambled, 1, 1, 2, 1);
 		TextField input = new TextField();
+		
+		input.setOnKeyPressed((final KeyEvent keyEvent) -> {
+	        if (keyEvent.getCode() == KeyCode.ENTER) {
+	        		ScrambleController.checkInput(input.getText(), scrambled.getText());
+	        		input.clear();
+	        }
+		});
+		
 		grid.add(input, 1, 3, 2, 1);
 				
 		Scene scene = new Scene(grid, 400, 400);

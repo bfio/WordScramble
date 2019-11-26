@@ -61,7 +61,6 @@ public class StartupView {
 		difficultyDropdown.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				StartupController.setCurrentDifficulty(difficultyDropdown.getValue());
-				System.out.print("");
 			}
 		});
 
