@@ -4,8 +4,7 @@ public interface Scrambler {
 	
 	public static String scrambleWord(String toScramble) {
 
-		//TODO Algorithm to determine a scrambled phrase
-		
+		char [] temp = toScramble.toCharArray();
 		return toScramble + " but scrambled";
 	}
 
