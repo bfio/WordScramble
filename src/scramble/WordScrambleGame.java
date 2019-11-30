@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import scramble.element.Difficulty;
+import scramble.element.Score;
 import scramble.element.User;
 import scramble.view.StartupView;
 
@@ -12,6 +13,7 @@ public class WordScrambleGame extends Application {
 	private static Stage primaryStage;
 	private static Difficulty currentDifficulty;
 	private static User currentUser;
+	private static Score currentScore;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -48,6 +50,14 @@ public class WordScrambleGame extends Application {
 
 	public static void setCurrentUser(User currentUser) {
 		WordScrambleGame.currentUser = currentUser;
+	}
+
+	public static Score getCurrentScore() {
+		return currentScore;
+	}
+
+	public static void setCurrentScore(Score currentScore) {
+		WordScrambleGame.currentScore = currentScore;
 	}
 }
 

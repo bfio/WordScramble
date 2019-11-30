@@ -12,16 +12,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import scramble.WordScrambleGame;
 import scramble.controller.ScrambleController;
 import scramble.element.CountdownTimer;
+import scramble.element.Score;
 
 public class ScrambleView extends Stage {
-	
-	private static String scrambleViewTitle = "Word Scramble";
 	
 	public Scene getScrambleView() {
 		this.setMaximized(true);
@@ -52,6 +52,8 @@ public class ScrambleView extends Stage {
 		pane.setAlignment(timer, Pos.TOP_RIGHT);
 		//pane.getChildren().add(timer);
 		
+		WordScrambleGame.setCurrentScore(new Score(
+				WordScrambleGame.getCurrentUser(),0));
 		Button score = new Button("Score Placeholder");
 		pane.setAlignment(score, Pos.TOP_LEFT);
 		pane.setLeft(score);
@@ -84,9 +86,19 @@ public class ScrambleView extends Stage {
 		Button timer = new Button("Timer Placeholder");
 		
 		grid.add(timer, 0, 0);
-		Button score = new Button("Score Placeholder");
+		ScrambleController.initializeScore();
+		
+		Button score = new Button(WordScrambleGame.getCurrentScore().getPoints().toString());
+		score.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				ScrambleController.setScrambleScore();
+				score.setText(WordScrambleGame.getCurrentScore().getPoints().toString());
+			}
+		});
+		
 		grid.add(score, 3, 0);
-		Label scrambled = new Label("Scrambled here");
+		Label scrambled = new Label("Scrambled");
 		grid.add(scrambled, 1, 1, 2, 1);
 		TextField input = new TextField();
 		
@@ -98,6 +110,19 @@ public class ScrambleView extends Stage {
 		});
 		
 		grid.add(input, 1, 3, 2, 1);
+		
+		Button btn = new Button("Finish game");
+		HBox hbBtn = new HBox(10);
+		hbBtn.setAlignment(Pos.BOTTOM_CENTER);
+		hbBtn.getChildren().add(btn);
+		grid.add(hbBtn, 1, 4);
+		
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				WordScrambleGame.changeScene(new FinalView().getScene());
+			}
+		});
 				
 		Scene scene = new Scene(grid, 400, 400);
 		return scene;

@@ -8,7 +8,7 @@ import scramble.element.Score;
 public class ScoreDAO {
 	
 	private static ArrayList<Score> scores; 
-	private static File scoresDatabase;
+	private final static File scoresDatabase = new File("ScoresDatabase.txt");
 	
 	public ScoreDAO() {
 		

@@ -2,26 +2,28 @@ package scramble.element;
 
 public class User {
 	
-	private char[] initials;
+	private String initials;
 	
-	public User(char[] initials) {
+	public User(String initials) {
+		this.initials = initials.substring(0, 3);
+		/*
 		this.initials[0] = initials[0];
 		this.initials[1] = initials[1];
 		this.initials[2] = initials[2];
+		*/
 	}
 
-	protected char[] getInitials() {
+	protected String getInitials() {
 		return initials;
-	}
-
-	protected void setInitials(char[] initials) {
-		this.initials = initials;
 	}
 	
 	protected void setInitials(String name) {
-		this.setInitials(name.substring(0, 3).toCharArray());
+		this.initials = name.substring(0, 3);
 	}
 	
+	public String getInitialsString() {
+		return this.initials.toString().toUpperCase();
+	}
 	
 	
 	

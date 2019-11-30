@@ -1,6 +1,10 @@
 package scramble.controller;
 
-public class ScrambleController {
+import scramble.Scrambler;
+import scramble.WordScrambleGame;
+import scramble.element.Score;
+
+public class ScrambleController implements Scrambler {
 	
 	public static void checkInput(String input, String correct) {
 		input.trim();
@@ -9,10 +13,25 @@ public class ScrambleController {
 		correct.toLowerCase();
 		
 		if (input.equals(correct)) {
-			//Add points
+			updateScore(input);
 		} else {
 			//Handle incorrect input
 		}
+	}
+	
+	private static void updateScore(String input) {
+		WordScrambleGame.getCurrentScore().addPoints(Scrambler.calculateValue(input));
+	}
+
+	public static void initializeScore() {
+		WordScrambleGame.setCurrentScore(new Score(
+				WordScrambleGame.getCurrentUser(), 0));
+	}
+	
+	public static void setScrambleScore() {
+		Score temp = new Score(WordScrambleGame.getCurrentScore().getPoints());
+		temp.addPoints(100);
+		WordScrambleGame.setCurrentScore(temp);
 	}
 
 }
