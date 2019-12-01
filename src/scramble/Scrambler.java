@@ -3,8 +3,12 @@ package scramble;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import scramble.element.Difficulty;
+
 
 public interface Scrambler {
+	
+	public static Difficulty difficulty = WordScrambleGame.getCurrentDifficulty();
 	
 	public static String scrambleWord(String toScramble) {
 
@@ -21,9 +25,25 @@ public interface Scrambler {
 
 	public static int calculateValue(String phrase) {
 		
-		//TODO Algorithm to determine a words value
+		switch(difficulty) {
+			
+		case EASY:
+			int easyLength = phrase.length();
+			easyLength = easyLength * 25;
+			return easyLength;
+		case MEDIUM:
+			int mediumLength = phrase.length();
+			mediumLength = mediumLength * 65;
+			return mediumLength;
+		case HARD:
+			int hardLength = phrase.length();
+			hardLength = hardLength * 120;
+			return hardLength;
+		default:
+			return phrase.length() * 2;
+		}
 		
-		return phrase.length() * 100;
+		
 	}
 
 }
