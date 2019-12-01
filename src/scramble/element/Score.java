@@ -25,7 +25,7 @@ public class Score {
 	}
 	
 	public void addPoints(Integer toAdd) {
-		this.setPoints(this.getPoints() + 100);;
+		this.setPoints(this.getPoints() + toAdd);;
 	}
 	
 	

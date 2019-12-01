@@ -29,7 +29,7 @@ public class StartupController {
 					StartupView.getUserTextField().getText().substring(0,3)));
 			StartupController.setCurrentDifficulty(
 					StartupView.getDifficultyDropdown().getValue());
-			WordScrambleGame.changeScene(new ScrambleView().getScrambleView3());
+			WordScrambleGame.changeScene(new ScrambleView().getScrambleView());
 		}
 		/*
 		try {
