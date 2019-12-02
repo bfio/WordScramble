@@ -33,7 +33,7 @@ public class FinalView {
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				WordScrambleGame.changeScene(new StartupView().getStartupScene());;
+				WordScrambleGame.changeScene(new StartupView().getScene());
 			}
 		});
 		grid.add(newGame, 0, 3);

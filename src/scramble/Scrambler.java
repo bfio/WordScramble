@@ -8,8 +8,6 @@ import scramble.element.Difficulty;
 
 public interface Scrambler {
 	
-	public static Difficulty difficulty = WordScrambleGame.getCurrentDifficulty();
-	
 	public static String scrambleWord(String toScramble) {
 
 		String[] scrambleArray = toScramble.split("");
@@ -23,7 +21,7 @@ public interface Scrambler {
 		
 	}
 
-	public static int calculateValue(String phrase) {
+	public static int calculateValue(String phrase, Difficulty difficulty) {
 		
 		switch(difficulty) {
 			

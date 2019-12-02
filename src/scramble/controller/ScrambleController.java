@@ -6,11 +6,21 @@ import java.util.TimerTask;
 import scramble.Scrambler;
 import scramble.WordScrambleGame;
 import scramble.element.Score;
+import scramble.element.User;
+import scramble.model.ScrambleModel;
 import scramble.view.ScrambleView;
 
 public class ScrambleController implements Scrambler {
 
-	public static void checkInput(String input, String correct) {
+	private ScrambleView scrambleView;
+	private ScrambleModel scrambleModel;
+	
+	public ScrambleController() {
+		this.setScrambleView(new ScrambleView());
+		this.scrambleModel = new ScrambleModel();
+	}
+	
+	public void checkInput(String input, String correct) {
 		input = input.trim().toLowerCase();
 		correct = correct.trim().toLowerCase();
 
@@ -21,19 +31,19 @@ public class ScrambleController implements Scrambler {
 		}
 	}
 
-	private static void updateScore(String input) {
-		Score updatedScore = WordScrambleGame.getCurrentScore();
-		updatedScore.addPoints(Scrambler.calculateValue(input));
+	private void updateScore(String input) {
+		Score updatedScore = scrambleModel.getCurrentScore();
+		updatedScore.addPoints(Scrambler.calculateValue(input, scrambleModel.getCurrentDifficulty()));
 		ScrambleView.getScore().setText("Score: " + updatedScore.getPoints().toString());
 	}
 
-	public static void initializeScore() {
-		WordScrambleGame.setCurrentScore(new Score(
-				WordScrambleGame.getCurrentUser(), 0));
+	public void initializeScore() {
+		scrambleModel.setCurrentScore(new Score(
+				scrambleModel.getCurrentUser(), 0));
 	}
 
-	public static Integer initializeStartingTime() {
-		switch (WordScrambleGame.getCurrentDifficulty()) {
+	public Integer initializeStartingTime() {
+		switch (scrambleModel.getCurrentDifficulty()) {
 		case EASY: {
 			return new Integer(60);
 		}
@@ -49,7 +59,7 @@ public class ScrambleController implements Scrambler {
 		}
 	}
 
-	public static void runTimer(Integer duration) {
+	public void runTimer(Integer duration) {
 		new Timer().schedule(new TimerTask() {
 
 			@Override
@@ -58,9 +68,7 @@ public class ScrambleController implements Scrambler {
 					Integer updatedTime = duration;
 					updatedTime--;
 					ScrambleView.getTimer().setText("Time remaining: " + duration);
-					
-					
-					duration = duration.intValue() - 1;
+					updatedTime = updatedTime.intValue() - 1;
 					System.out.println("Time Left: " + duration);
 					//ScrambleView.getTimer().setText(new String(timeLeft.toString())); 
 					ScrambleView.setTimeRemaining(duration);
@@ -69,6 +77,18 @@ public class ScrambleController implements Scrambler {
 				}
 			}
 		}, 0, 1000);
+	}
+
+	public String scrambleString(String scrambledString) {
+		return Scrambler.scrambleWord(scrambledString);
+	}
+
+	public ScrambleView getScrambleView() {
+		return scrambleView;
+	}
+
+	public void setScrambleView(ScrambleView scrambleView) {
+		this.scrambleView = scrambleView;
 	}
 
 

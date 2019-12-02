@@ -3,6 +3,7 @@ package scramble.DAO;
 import java.io.File;
 
 import scramble.WordScrambleGame;
+import scramble.model.ScrambleModel;
 
 public class DatabaseDAO {
 
@@ -10,22 +11,22 @@ public class DatabaseDAO {
 
 	//Singleton implementation of database?
 
-	public DatabaseDAO() {
-		switch (WordScrambleGame.getCurrentDifficulty()) {
+	public DatabaseDAO(ScrambleModel scrambleModel) {
+		switch (scrambleModel.getCurrentDifficulty()) {
 		case EASY: {
-			this.wordsDatabase = new File("EasyWordDatabase.txt");
+			DatabaseDAO.wordsDatabase = new File("EasyWordDatabase.txt");
 			break;
 		}
 		case MEDIUM: {
-			this.wordsDatabase = new File("MediumWordDatabase.txt");
+			DatabaseDAO.wordsDatabase = new File("MediumWordDatabase.txt");
 			break;
 		}
 		case HARD: {
-			this.wordsDatabase = new File("HardWordDatabase.txt");
+			DatabaseDAO.wordsDatabase = new File("HardWordDatabase.txt");
 			break;
 		}
 		default: {
-			this.wordsDatabase = new File("EasyWordDatabase.txt");
+			DatabaseDAO.wordsDatabase = new File("EasyWordDatabase.txt");
 			break;
 		}
 		}

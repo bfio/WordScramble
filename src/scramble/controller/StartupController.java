@@ -1,47 +1,54 @@
 package scramble.controller;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import scramble.WordScrambleGame;
 import scramble.element.Difficulty;
 import scramble.element.User;
+import scramble.model.ScrambleModel;
 import scramble.view.ScrambleView;
 import scramble.view.StartupView;
 
 public class StartupController {
+	
+	private static StartupView startupView;
+	private static ScrambleModel scrambleModel;
+	
+	public StartupController(StartupView startupView, ScrambleModel scrambleModel) {
+		this.startupView = startupView;
+		this.scrambleModel = scrambleModel;
+	}
 
 	public static void setCurrentDifficulty(Difficulty selectedDifficulty) {
-		WordScrambleGame.setCurrentDifficulty(selectedDifficulty);
+		startupView.getDifficultyDropdown().setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				scrambleModel.setCurrentDifficulty(startupView.getDifficultyDropdown().getValue());
+			}
+		});
 	}
 
 	public static void setCurrentUser(User user) {
-		WordScrambleGame.setCurrentUser(user);
+		startupView.getUserTextField().setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				scrambleModel.setCurrentUser(new User(startupView.getUserTextField().getText()));
+			}
+		});
 	}
 
 	public static void startGame() {
-		if ((StartupView.getUserTextField().getLength() != 3) || (StartupView.getDifficultyDropdown().getValue() == null)) {
+		if ((startupView.getUserTextField().getLength() != 3) || (startupView.getDifficultyDropdown().getValue() == null)) {
 			Alert errorAlert = new Alert(AlertType.ERROR);
 			errorAlert.setHeaderText("Startup Info Errors");
 			errorAlert.setContentText("Make sure initials are correct and difficulty is selected before beginning the game");
 			errorAlert.showAndWait();
 		} else {
-			StartupController.setCurrentUser(new User(
-					StartupView.getUserTextField().getText().substring(0,3)));
-			StartupController.setCurrentDifficulty(
-					StartupView.getDifficultyDropdown().getValue());
+			scrambleModel.setCurrentUser(new User(
+					startupView.getUserTextField().getText().substring(0,3)));
+			scrambleModel.setCurrentDifficulty(
+					startupView.getDifficultyDropdown().getValue());
 			WordScrambleGame.changeScene(new ScrambleView().getScrambleView());
 		}
-		/*
-		try {
-			WordScrambleGame.changeScene(new ScrambleView().getScrambleView3());
-		} catch (Exception e) {
-			Alert errorAlert = new Alert(AlertType.ERROR);
-			errorAlert.setHeaderText("Startup Info Errors");
-			errorAlert.setContentText("Make sure initials and difficulty are selected before beginning game");
-			errorAlert.showAndWait();
-		}
-		 */
-
 	}
-
 }

@@ -13,12 +13,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import scramble.WordScrambleGame;
 import scramble.controller.StartupController;
 import scramble.element.Difficulty;
 import scramble.element.User;
 
-public class StartupView {
+public class StartupView extends Stage {
 
 	private static String startupViewTitle = "Welcome to Word Scramble!";
 	private static List<Difficulty> difficultyList;
@@ -29,41 +30,22 @@ public class StartupView {
 	private static GridPane grid;
 	private static Button beginButton;
 
-	public Scene getStartupScene() {
-		grid = new GridPane();
-		grid.setAlignment(Pos.CENTER);
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(25, 25, 25, 25));
+	public StartupView() {
+		super.setTitle(startupViewTitle);
+		initGrid();
+		initIntials();
+		initUserText();
+		initDifficultyLabel();
+		initDifficultyDropdown();
+		initBegin();
 
-		initialsLabel = new Label("Enter your initials:");
-		grid.add(initialsLabel, 0, 1);
+		Scene scene = new Scene(grid, 400, 400);
+		scene.getStylesheets().add(WordScrambleGame.class.getResource("application.css").toExternalForm());
+		
+		super.setScene(scene);
+	}
 
-		userTextField = new TextField();
-		userTextField.setMaxWidth(50);
-		grid.add(userTextField, 1, 1);
-
-		userTextField.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				StartupController.setCurrentUser(new User(userTextField.getText()));
-			}
-		});
-
-		difficultyLabel = new Label("Select Difficulty:");
-		grid.add(difficultyLabel, 0, 2);
-
-		addDifficulties();
-
-		difficultyDropdown = new ComboBox<Difficulty>();
-		difficultyDropdown.getItems().addAll(difficultyList);
-		grid.add(difficultyDropdown, 1, 2);
-
-		difficultyDropdown.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				StartupController.setCurrentDifficulty(difficultyDropdown.getValue());
-			}
-		});
-
+	private void initBegin() {
 		beginButton = new Button("Begin Game");
 		grid.add(beginButton, 1, 3);
 
@@ -73,58 +55,84 @@ public class StartupView {
 				StartupController.startGame();
 			}
 		});
-
-		Scene scene = new Scene(grid, 400, 400);
-		scene.getStylesheets().add(WordScrambleGame.class.getResource("application.css").toExternalForm());
-
-		return scene;
 	}
 
-	protected static List<Difficulty> getDiffList() {
+	private void initDifficultyDropdown() {
+		addDifficulties();
+		difficultyDropdown = new ComboBox<Difficulty>();
+		difficultyDropdown.getItems().addAll(difficultyList);
+		grid.add(difficultyDropdown, 1, 2);
+	}
+
+	private void initDifficultyLabel() {
+		difficultyLabel = new Label("Select Difficulty:");
+		grid.add(difficultyLabel, 0, 2);
+	}
+
+	private void initUserText() {
+		userTextField = new TextField();
+		userTextField.setMaxWidth(50);
+		grid.add(userTextField, 1, 1);
+	}
+
+	private void initIntials() {
+		initialsLabel = new Label("Enter your initials:");
+		grid.add(initialsLabel, 0, 1);
+	}
+
+	private void initGrid() {
+		grid = new GridPane();
+		grid.setAlignment(Pos.CENTER);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
+	}
+
+	protected List<Difficulty> getDiffList() {
 		return difficultyList;
 	}
 
-	protected static void setDiffList(List<Difficulty> diffList) {
+	protected void setDiffList(List<Difficulty> diffList) {
 		StartupView.difficultyList = diffList;
 	}
 
-	protected static Label getInitialsLabel() {
+	protected Label getInitialsLabel() {
 		return initialsLabel;
 	}
 
-	protected static void setInitialsLabel(Label initialsLabel) {
+	protected void setInitialsLabel(Label initialsLabel) {
 		StartupView.initialsLabel = initialsLabel;
 	}
 
-	public static TextField getUserTextField() {
+	public TextField getUserTextField() {
 		return userTextField;
 	}
 
-	protected static void setUserTextField(TextField userTextField) {
+	protected void setUserTextField(TextField userTextField) {
 		StartupView.userTextField = userTextField;
 	}
 
-	protected static Label getDifficultyLabel() {
+	protected Label getDifficultyLabel() {
 		return difficultyLabel;
 	}
 
-	protected static void setDifficultyLabel(Label difficultyLabel) {
+	protected void setDifficultyLabel(Label difficultyLabel) {
 		StartupView.difficultyLabel = difficultyLabel;
 	}
 
-	public static ComboBox<Difficulty> getDifficultyDropdown() {
+	public ComboBox<Difficulty> getDifficultyDropdown() {
 		return difficultyDropdown;
 	}
 
-	protected static void setDifficultyDropdown(ComboBox<Difficulty> difficultyDropdown) {
+	protected void setDifficultyDropdown(ComboBox<Difficulty> difficultyDropdown) {
 		StartupView.difficultyDropdown = difficultyDropdown;
 	}
 
-	protected static void setStartupViewTitle(String startupViewTitle) {
+	protected void setStartupViewTitle(String startupViewTitle) {
 		StartupView.startupViewTitle = startupViewTitle;
 	}
 
-	public static String getStartupViewTitle() {
+	public String getStartupViewTitle() {
 		return startupViewTitle;
 	}
 

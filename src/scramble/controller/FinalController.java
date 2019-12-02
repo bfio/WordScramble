@@ -1,19 +1,25 @@
 package scramble.controller;
 
-import scramble.WordScrambleGame;
+import scramble.model.ScrambleModel;
 
 public class FinalController {
 	
+	private static ScrambleModel scrambleModel;
+	
+	public FinalController(ScrambleModel scrambleModel) {
+		this.scrambleModel = scrambleModel;
+	}
+	
 	public static String getFinalScoreString() {
-		return WordScrambleGame.getCurrentScore().getPoints().toString();
+		return scrambleModel.getCurrentScore().getPoints().toString();
 	}
 
 	public static String getUserString() {
-		return WordScrambleGame.getCurrentUser().getInitialsString();
+		return scrambleModel.getCurrentUser().getInitialsString();
 	}
 	
 	public static String getDifficultyString() {
-		return WordScrambleGame.getCurrentDifficulty().toString();
+		return scrambleModel.getCurrentDifficulty().toString();
 	}
 
 }
