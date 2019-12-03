@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import scramble.WordScrambleGame;
 import scramble.element.Difficulty;
+import scramble.element.Score;
 import scramble.element.User;
 import scramble.model.ScrambleModel;
 import scramble.view.ScrambleView;
@@ -20,25 +21,6 @@ public class StartupController {
 		this.startupView = startupView;
 		this.scrambleModel = scrambleModel;
 		initializeBeginButton();
-	}
-
-	public void setCurrentDifficulty(Difficulty selectedDifficulty) {
-		this.startupView.getDifficultyDropdown().setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				scrambleModel.setCurrentDifficulty(startupView.getDifficultyDropdown().getValue());
-				System.out.println("Setting current difficulty: " + startupView.getDifficultyDropdown().getValue());
-			}
-		});
-	}
-
-	public void setCurrentUser(User user) {
-		this.startupView.getUserTextField().setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				scrambleModel.setCurrentUser(new User(startupView.getUserTextField().getText()));
-			}
-		});
 	}
 	
 	public void initializeBeginButton() {
@@ -59,6 +41,7 @@ public class StartupController {
 			errorAlert.showAndWait();
 		} else {
 			scrambleModel.setCurrentUser(new User(startupView.getUserTextField().getText().substring(0,3)));
+			scrambleModel.setCurrentScore(new Score(ScrambleModel.getCurrentUser(), 0));
 			scrambleModel.setCurrentDifficulty(startupView.getDifficultyDropdown().getValue());
 			ScrambleView scrambleView = new ScrambleView();
 			new ScrambleController(scrambleView, scrambleModel);

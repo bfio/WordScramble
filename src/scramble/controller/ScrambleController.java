@@ -1,5 +1,7 @@
 package scramble.controller;
 
+import java.io.IOException;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -12,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import scramble.Scrambler;
 import scramble.WordScrambleGame;
+import scramble.DAO.ScoreDAO;
 import scramble.element.Score;
 import scramble.model.ScrambleModel;
 import scramble.view.FinalView;
@@ -60,9 +63,19 @@ public class ScrambleController implements Scrambler {
 	}
 
 	private void finishGame() {
+		try {
+			recordScore();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		FinalView finalView = new FinalView();
 		new FinalController(finalView, scrambleModel);
 		WordScrambleGame.changeScene(finalView.getScene());
+	}
+
+	private void recordScore() throws IOException {
+		ScoreDAO scoreDAO = new ScoreDAO();
+		scoreDAO.writeScore(ScrambleModel.getCurrentScore());
 	}
 
 	private void updateScore(String input) {

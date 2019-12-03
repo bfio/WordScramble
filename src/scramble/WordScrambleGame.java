@@ -25,6 +25,7 @@ public class WordScrambleGame extends Application {
 		scrambleModel = new ScrambleModel();
 		new StartupController(startupView, scrambleModel);
 		WordScrambleGame.primaryStage = startupView;
+		WordScrambleGame.primaryStage.setTitle("Welcome to Word Scramble!");
 		WordScrambleGame.primaryStage.show();
 	}
 

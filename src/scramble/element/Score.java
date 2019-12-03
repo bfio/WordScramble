@@ -1,6 +1,6 @@
 package scramble.element;
 
-public class Score {
+public class Score implements Comparable<Score> {
 	
 	private User user;
 	private Integer points;
@@ -34,6 +34,17 @@ public class Score {
 	public String toString() {
 		return points.toString();
 	}
+
+	public int compareTo(Score o) {
+		if (this.points > o.points) {
+			return 1;
+		} else if (this.points == o.points) {
+			return 0;
+		} else {
+			return -1;
+		}
+	}
+
 	
 	
 

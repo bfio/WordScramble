@@ -21,7 +21,6 @@ import scramble.element.User;
 
 public class StartupView extends Stage {
 
-	private static String startupViewTitle = "Welcome to Word Scramble!";
 	private static List<Difficulty> difficultyList;
 	private static Label initialsLabel;
 	private static TextField userTextField;
@@ -31,7 +30,6 @@ public class StartupView extends Stage {
 	private static Button beginButton;
 
 	public StartupView() {
-		super.setTitle(startupViewTitle);
 		initGrid();
 		initIntials();
 		initUserText();
@@ -94,58 +92,18 @@ public class StartupView extends Stage {
 		grid.setPadding(new Insets(25, 25, 25, 25));
 	}
 
-	protected List<Difficulty> getDiffList() {
-		return difficultyList;
-	}
-
-	protected void setDiffList(List<Difficulty> diffList) {
-		StartupView.difficultyList = diffList;
-	}
-
-	protected Label getInitialsLabel() {
-		return initialsLabel;
-	}
-
-	protected void setInitialsLabel(Label initialsLabel) {
-		StartupView.initialsLabel = initialsLabel;
+	private void addDifficulties() {
+		difficultyList = new ArrayList<Difficulty>();
+		difficultyList.add(Difficulty.EASY);
+		difficultyList.add(Difficulty.MEDIUM);
+		difficultyList.add(Difficulty.HARD);
 	}
 
 	public TextField getUserTextField() {
 		return userTextField;
 	}
 
-	protected void setUserTextField(TextField userTextField) {
-		StartupView.userTextField = userTextField;
-	}
-
-	protected Label getDifficultyLabel() {
-		return difficultyLabel;
-	}
-
-	protected void setDifficultyLabel(Label difficultyLabel) {
-		StartupView.difficultyLabel = difficultyLabel;
-	}
-
 	public ComboBox<Difficulty> getDifficultyDropdown() {
 		return difficultyDropdown;
-	}
-
-	protected void setDifficultyDropdown(ComboBox<Difficulty> difficultyDropdown) {
-		StartupView.difficultyDropdown = difficultyDropdown;
-	}
-
-	protected void setStartupViewTitle(String startupViewTitle) {
-		StartupView.startupViewTitle = startupViewTitle;
-	}
-
-	public String getStartupViewTitle() {
-		return startupViewTitle;
-	}
-
-	private void addDifficulties() {
-		difficultyList = new ArrayList<Difficulty>();
-		difficultyList.add(Difficulty.EASY);
-		difficultyList.add(Difficulty.MEDIUM);
-		difficultyList.add(Difficulty.HARD);
 	}
 }

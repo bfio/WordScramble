@@ -1,7 +1,5 @@
 package scramble.view;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import scramble.WordScrambleGame;
-import scramble.controller.StartupController;
 import scramble.model.ScrambleModel;
 
 public class FinalView extends Stage {
@@ -22,12 +19,13 @@ public class FinalView extends Stage {
 	private static Button newGameButton;
 
 	public FinalView() {
-		super.setTitle("Final Results");
+		WordScrambleGame.getPrimaryStage().setTitle("Final Results");
 		initGrid();
 		initUserLabel();
 		initDifficultyLabel();
 		initFinalScoreLabel();
 		initNewGameButton();
+		initLeaderboard();
 
 		Scene scene = new Scene(grid, 400, 400);
 		scene.getStylesheets().add(WordScrambleGame.class.getResource("application.css").toExternalForm());
@@ -37,7 +35,8 @@ public class FinalView extends Stage {
 	
 	private void initNewGameButton() {
 		newGameButton = new Button("New Game");
-		grid.add(newGameButton, 0, 3);
+		newGameButton.setAlignment(Pos.CENTER);
+		grid.add(newGameButton, 0, 4, 2, 2);
 	}
 
 	private void initFinalScoreLabel() {
@@ -53,6 +52,17 @@ public class FinalView extends Stage {
 	private void initUserLabel() {
 		userLabel = new Label("User: " + ScrambleModel.getCurrentUser().toString());
 		grid.add(userLabel, 0, 0);
+	}
+	
+	private void initLeaderboard() {
+		Label leaderboard = new Label("Leaderboard");
+		grid.add(leaderboard, 2, 0);
+		Label leaderA = new Label("Leader A");
+		grid.add(leaderA, 2, 1);
+		Label leaderB = new Label("Leader B");
+		grid.add(leaderB, 2, 2);
+		Label leaderC = new Label("Leader C");
+		grid.add(leaderC, 2, 3);
 	}
 
 	private void initGrid() {

@@ -27,7 +27,7 @@ public class ScrambleView extends Stage {
 	private static GridPane grid;
 
 	public ScrambleView() {
-		super.setTitle("Word Scramble");
+		WordScrambleGame.getPrimaryStage().setTitle("Word Scramble");
 		initGrid();
 		initScore();
 		initScrambled();
