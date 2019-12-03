@@ -8,6 +8,11 @@ import scramble.element.Difficulty;
 
 public interface Scrambler {
 	
+	/**
+	 * Method takes in a word and scrambles it
+	 * @param toScramble word going in to be scrambled
+	 * @return scrambled up word
+	 */
 	public static String scrambleWord(String toScramble) {
 
 		String[] scrambleArray = toScramble.split("");
@@ -21,6 +26,12 @@ public interface Scrambler {
 		
 	}
 
+	/**
+	 * Method calculates score based on length of the word and the difficulty chosen
+	 * @param phrase Word being passed through to calculate score
+	 * @param difficulty determines the difficulty of the game and gives points accordingly
+	 * @return The amount of points earned
+	 */
 	public static int calculateValue(String phrase, Difficulty difficulty) {
 		
 		switch(difficulty) {
