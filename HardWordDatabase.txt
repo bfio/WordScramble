@@ -14,3 +14,8 @@ extension
 enterprise
 resource
 planning
+scoring
+corkscrew
+keyboard
+optical
+mountain

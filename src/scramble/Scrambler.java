@@ -17,7 +17,7 @@ public interface Scrambler {
         for (String c : letters) {
             sb.append(c);
         }
-        return sb.toString() + " but scrambled";
+        return sb.toString();
 		
 	}
 

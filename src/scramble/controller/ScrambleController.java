@@ -39,7 +39,7 @@ public class ScrambleController implements Scrambler {
 
 	private void initializeScrambled() {
 		scrambleView.getGrid().getChildren().remove(scrambleView.getScrambled());
-		scrambleView.replaceScrambled(ScrambleModel.getCurrentScrambleList().get(ScrambleModel.getCurrentIteration()));;
+		scrambleView.replaceScrambled(Scrambler.scrambleWord((ScrambleModel.getCurrentScrambleList().get(ScrambleModel.getCurrentIteration()))));
 	}
 
 	private void initializeScrambledList() {
@@ -75,7 +75,7 @@ public class ScrambleController implements Scrambler {
 			updateScore(input);
 			ScrambleModel.setCurrentIteration(ScrambleModel.getCurrentIteration() + 1);
 			scrambleView.getGrid().getChildren().remove(scrambleView.getScrambled());
-			scrambleView.replaceScrambled(ScrambleModel.getCurrentScrambleList().get(ScrambleModel.getCurrentIteration()));
+			scrambleView.replaceScrambled(Scrambler.scrambleWord(ScrambleModel.getCurrentScrambleList().get(ScrambleModel.getCurrentIteration())));
 		} else {
 			//Handle incorrect input
 		}
@@ -113,7 +113,7 @@ public class ScrambleController implements Scrambler {
 		scrambleView.getInput().setOnKeyPressed((final KeyEvent keyEvent) -> {
 			if (keyEvent.getCode() == KeyCode.ENTER) {
 				System.out.println("Checking input");
-				checkInput(scrambleView.getInput().getText(), scrambleView.getScrambled().getText());
+				checkInput(scrambleView.getInput().getText(), ScrambleModel.getCurrentScrambleList().get(ScrambleModel.getCurrentIteration()));
 				((TextInputControl) scrambleView.getInput()).clear();
 			}
 		});
@@ -130,7 +130,7 @@ public class ScrambleController implements Scrambler {
 			break;
 		}
 		case HARD: {
-			ScrambleModel.setCurrentTime(4);
+			ScrambleModel.setCurrentTime(30);
 			break;
 		}
 		default: {

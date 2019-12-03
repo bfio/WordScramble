@@ -16,3 +16,10 @@ shuffle
 first
 orient
 domino
+potato
+knife
+drench
+screen
+coffee
+tricep
+laptop
