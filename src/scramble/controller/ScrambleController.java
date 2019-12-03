@@ -31,9 +31,9 @@ public class ScrambleController implements Scrambler {
 		this.scrambleModel = scrambleModel;
 		initializeScore();
 		initializeInput();
-		initializeFinish();
 		initializeScrambledList();
 		initializeScrambled();
+		initializeFinish();
 		runTimer();
 	}
 
@@ -63,7 +63,7 @@ public class ScrambleController implements Scrambler {
 	public void checkInput(String input, String correct) {
 		input = input.trim().toLowerCase();
 		correct = correct.trim().toLowerCase();
-		System.out.println("Checking input " + input + " against correct " + correct);
+		System.out.println("Checking input " + input + " against correct");
 
 		if (ScrambleModel.getCurrentTime() <= 0) {
 			scrambleView.getGrid().getChildren().remove(scrambleView.getInput());
@@ -112,7 +112,6 @@ public class ScrambleController implements Scrambler {
 		System.out.println("Initializing input");
 		scrambleView.getInput().setOnKeyPressed((final KeyEvent keyEvent) -> {
 			if (keyEvent.getCode() == KeyCode.ENTER) {
-				System.out.println("Checking input");
 				checkInput(scrambleView.getInput().getText(), ScrambleModel.getCurrentScrambleList().get(ScrambleModel.getCurrentIteration()));
 				((TextInputControl) scrambleView.getInput()).clear();
 			}
@@ -148,7 +147,7 @@ public class ScrambleController implements Scrambler {
 		final Timeline timeline = new Timeline();
 		timeline.setCycleCount(startTime + 1);
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), ev -> {
-			System.out.println("Time Left: " + ScrambleModel.getCurrentTime());
+			//System.out.println("Time Left: " + ScrambleModel.getCurrentTime());
 			scrambleView.getGrid().getChildren().remove(scrambleView.getTimer());
 			Label newTimer = new Label("" + ScrambleModel.getCurrentTime());
 			scrambleView.setTimer(newTimer);
@@ -158,7 +157,6 @@ public class ScrambleController implements Scrambler {
 			if (ScrambleModel.getCurrentTime() < 0) {
 				scrambleView.getGrid().getChildren().remove(scrambleView.getInput());
 				scrambleView.replaceInput();
-				//scrambleView.getGrid().getChildren().add(scrambleView.getInput());
 			}
 			
 		}));

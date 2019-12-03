@@ -25,7 +25,7 @@ public class FinalView extends Stage {
 		initDifficultyLabel();
 		initFinalScoreLabel();
 		initNewGameButton();
-		initLeaderboard();
+		//initLeaderboard();
 
 		Scene scene = new Scene(grid, 400, 400);
 		scene.getStylesheets().add(WordScrambleGame.class.getResource("application.css").toExternalForm());
@@ -54,6 +54,7 @@ public class FinalView extends Stage {
 		grid.add(userLabel, 0, 0);
 	}
 	
+	@Deprecated
 	private void initLeaderboard() {
 		Label leaderboard = new Label("Leaderboard");
 		grid.add(leaderboard, 2, 0);
@@ -73,7 +74,7 @@ public class FinalView extends Stage {
 		grid.setPadding(new Insets(25, 25, 25, 25));
 	}
 	
-	public static Button getNewGameButton() {
+	public Button getNewGameButton() {
 		return newGameButton;
 	}
 

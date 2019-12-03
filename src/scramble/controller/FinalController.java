@@ -19,7 +19,7 @@ public class FinalController {
 	}
 	
 	private void initNewGameButton() {
-		this.finalView.getNewGameButton().setOnAction(new EventHandler<ActionEvent>() {
+		finalView.getNewGameButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				newGame();
@@ -30,6 +30,7 @@ public class FinalController {
 	public void newGame() {
 		StartupView startupView = new StartupView();
 		new StartupController(startupView, scrambleModel);
+		WordScrambleGame.getPrimaryStage().setTitle("Welcome to Word Scramble!");
 		WordScrambleGame.changeScene(startupView.getScene());
 	}
 
