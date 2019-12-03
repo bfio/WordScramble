@@ -35,6 +35,7 @@ public class Score implements Comparable<Score> {
 		return points.toString();
 	}
 
+	@Override
 	public int compareTo(Score o) {
 		if (this.points > o.points) {
 			return 1;
