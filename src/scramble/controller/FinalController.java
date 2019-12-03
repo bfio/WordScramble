@@ -1,25 +1,36 @@
 package scramble.controller;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import scramble.WordScrambleGame;
 import scramble.model.ScrambleModel;
+import scramble.view.FinalView;
+import scramble.view.StartupView;
 
 public class FinalController {
 	
-	private static ScrambleModel scrambleModel;
+	private FinalView finalView;
+	private ScrambleModel scrambleModel;
 	
-	public FinalController(ScrambleModel scrambleModel) {
+	public FinalController(FinalView finalView, ScrambleModel scrambleModel) {
+		this.finalView = finalView;
 		this.scrambleModel = scrambleModel;
+		initNewGameButton();
 	}
 	
-	public static String getFinalScoreString() {
-		return scrambleModel.getCurrentScore().getPoints().toString();
-	}
-
-	public static String getUserString() {
-		return scrambleModel.getCurrentUser().getInitialsString();
+	private void initNewGameButton() {
+		this.finalView.getNewGameButton().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				newGame();
+			}
+		});
 	}
 	
-	public static String getDifficultyString() {
-		return scrambleModel.getCurrentDifficulty().toString();
+	public void newGame() {
+		StartupView startupView = new StartupView();
+		new StartupController(startupView, scrambleModel);
+		WordScrambleGame.changeScene(startupView.getScene());
 	}
 
 }

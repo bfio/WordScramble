@@ -13,42 +13,56 @@ import scramble.view.StartupView;
 
 public class StartupController {
 	
-	private static StartupView startupView;
-	private static ScrambleModel scrambleModel;
+	private StartupView startupView;
+	private ScrambleModel scrambleModel;
 	
 	public StartupController(StartupView startupView, ScrambleModel scrambleModel) {
 		this.startupView = startupView;
 		this.scrambleModel = scrambleModel;
+		initializeBeginButton();
 	}
 
-	public static void setCurrentDifficulty(Difficulty selectedDifficulty) {
-		startupView.getDifficultyDropdown().setOnAction(new EventHandler<ActionEvent>() {
+	public void setCurrentDifficulty(Difficulty selectedDifficulty) {
+		this.startupView.getDifficultyDropdown().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
 			public void handle(ActionEvent e) {
 				scrambleModel.setCurrentDifficulty(startupView.getDifficultyDropdown().getValue());
+				System.out.println("Setting current difficulty: " + startupView.getDifficultyDropdown().getValue());
 			}
 		});
 	}
 
-	public static void setCurrentUser(User user) {
-		startupView.getUserTextField().setOnAction(new EventHandler<ActionEvent>() {
+	public void setCurrentUser(User user) {
+		this.startupView.getUserTextField().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
 			public void handle(ActionEvent e) {
 				scrambleModel.setCurrentUser(new User(startupView.getUserTextField().getText()));
 			}
 		});
 	}
+	
+	public void initializeBeginButton() {
+		startupView.getBeginButton().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				startGame();
+			}
+		});
+		System.out.println("Initializing begin button");
+	}
 
-	public static void startGame() {
-		if ((startupView.getUserTextField().getLength() != 3) || (startupView.getDifficultyDropdown().getValue() == null)) {
+	private void startGame() {
+		if ((this.startupView.getUserTextField().getLength() != 3) || (startupView.getDifficultyDropdown().getValue() == null)) {
 			Alert errorAlert = new Alert(AlertType.ERROR);
 			errorAlert.setHeaderText("Startup Info Errors");
 			errorAlert.setContentText("Make sure initials are correct and difficulty is selected before beginning the game");
 			errorAlert.showAndWait();
 		} else {
-			scrambleModel.setCurrentUser(new User(
-					startupView.getUserTextField().getText().substring(0,3)));
-			scrambleModel.setCurrentDifficulty(
-					startupView.getDifficultyDropdown().getValue());
-			WordScrambleGame.changeScene(new ScrambleView().getScrambleView());
+			scrambleModel.setCurrentUser(new User(startupView.getUserTextField().getText().substring(0,3)));
+			scrambleModel.setCurrentDifficulty(startupView.getDifficultyDropdown().getValue());
+			ScrambleView scrambleView = new ScrambleView();
+			new ScrambleController(scrambleView, scrambleModel);
+			WordScrambleGame.changeScene(scrambleView.getScene());
 		}
 	}
 }

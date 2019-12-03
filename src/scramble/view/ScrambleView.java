@@ -1,18 +1,20 @@
 package scramble.view;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import scramble.WordScrambleGame;
+import scramble.model.ScrambleModel;
 
 public class ScrambleView extends Stage {
 
@@ -20,67 +22,62 @@ public class ScrambleView extends Stage {
 	private static Label score;
 	private static Label scrambled;
 	private static String scrambledString;
-	private static TextField input;
+	private static Node input;
 	private static Button finishGameButton;
-	private static String scoreString;
-	private static Integer startingTime;
-	private static Integer timeRemaining;
 	private static GridPane grid;
 
-	public Scene getScrambleView() {
+	public ScrambleView() {
+		super.setTitle("Word Scramble");
 		initGrid();
-		initTimer();
 		initScore();
 		initScrambled();
 		initInput();
 		initFinish();
-
+		initTimer();
 		Scene scene = new Scene(grid, 400, 400);
-		return scene;
+		scene.getStylesheets().add(WordScrambleGame.class.getResource("application.css").toExternalForm());
+		
+		super.setScene(scene);
 	}
 
 	private void initFinish() {
+		System.out.println("Initializing finish button");
 		finishGameButton = new Button("Finish game");
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BOTTOM_CENTER);
 		hbBtn.getChildren().add(finishGameButton);
 		grid.add(hbBtn, 1, 4);
-
-		finishGameButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				//WordScrambleGame.changeScene(new FinalView().getScene());
-			}
-		});
 	}
 
 	private void initInput() {
+		System.out.println("Initializing input");
 		input = new TextField();
-		input.setOnKeyPressed((final KeyEvent keyEvent) -> {
-			if (keyEvent.getCode() == KeyCode.ENTER) {
-				//ScrambleController.checkInput(input.getText(), scrambled.getText());
-				input.clear();
-			}
-		});
-		grid.add(input, 1, 3, 2, 1);
+		grid.add(input, 1, 3);
+	}
+	
+	public void replaceInput() {
+		input = new Label("Game over!");
+		grid.add(input, 1, 3);
 	}
 
 	private void initScrambled() {
-		scrambled = new Label();
+		System.out.println("Initializing scrambled phrase");
+		scrambled = new Label("Scrambled");
+		scrambled.setPrefWidth(100);
 		scrambled.setAlignment(Pos.CENTER);
-		grid.add(scrambled, 1, 1, 2, 1);
+		grid.add(scrambled, 1, 1);
 	}
 
 	private void initScore() {
-		//ScrambleController.initializeScore();
-		//setScoreString(WordScrambleGame.getCurrentScore().getPoints().toString());
-		score = new Label("Score: " + scoreString);
+		System.out.println("Initializing score");
+		score = new Label("Score: " + ScrambleModel.getCurrentScore().toString());
 		score.setPrefWidth(75);
 		score.alignmentProperty().set(Pos.CENTER);
 		grid.add(score, 3, 0);
 	}
 
 	private void initGrid() {
+		System.out.println("Initializing grid");
 		grid = new GridPane();
 		grid.setPadding(new Insets(25, 25, 25, 25));
 		grid.setHgap(10);
@@ -88,80 +85,63 @@ public class ScrambleView extends Stage {
 		grid.setAlignment(Pos.CENTER);
 	}
 
-	public static Label getTimer() {
+	public Label getTimer() {
 		return timer;
 	}
 
+	public void setTimer(Label timer) {
+		ScrambleView.timer = timer;
+	}
+
+	public GridPane getGrid() {
+		return grid;
+	}
+
 	private void initTimer() {
-		timer = new Label();
-		timer.setPrefWidth(75);
-		//timeRemaining = ScrambleController.initializeStartingTime();
-		//ScrambleController.runTimer(ScrambleView.getStartingTime());
-		//timer.setText(ScrambleView.getTimeRemaining().toString());
+		System.out.println("Initializing timer");
+		timer = new Label("Timer starting!");
+		timer.setPrefWidth(100);
+		timer.setPadding(new Insets(15));
 		grid.add(timer, 0, 0);
 	}
 
-	public static Label getScore() {
+	public Label getScore() {
 		return score;
 	}
 
-	public static void setScore(Label score) {
+	public void setScore(Label score) {
 		ScrambleView.score = score;
 	}
 
-	public static Label getScrambled() {
+	public Label getScrambled() {
 		return scrambled;
 	}
 
-	public static void setScrambled(Label scrambled) {
+	public void setScrambled(Label scrambled) {
 		ScrambleView.scrambled = scrambled;
 	}
 
-	public static TextField getInput() {
+	public Node getInput() {
 		return input;
 	}
 
-	public static void setInput(TextField input) {
+	public void setInput(Node input) {
 		ScrambleView.input = input;
 	}
 
-	public static Button getFinishGameButton() {
+	public Button getFinishGameButton() {
 		return finishGameButton;
 	}
 
-	public static void setFinishGameButton(Button finishGameButton) {
+	public void setFinishGameButton(Button finishGameButton) {
 		ScrambleView.finishGameButton = finishGameButton;
 	}
 
-	public static String getScoreString() {
-		return scoreString;
-	}
-
-	public static void setScoreString(String scoreString) {
-		ScrambleView.scoreString = scoreString;
-	}
-
-	public static Integer getStartingTime() {
-		return startingTime;
-	}
-
-	public static void setStartingTime(Integer startingTime) {
-		ScrambleView.startingTime = startingTime;
-	}
-
-	public static Integer getTimeRemaining() {
-		return timeRemaining;
-	}
-
-	public static void setTimeRemaining(Integer timeRemaining) {
-		ScrambleView.timeRemaining = timeRemaining;
-	}
-
-	public static String getScrambledString() {
+	public String getScrambledString() {
 		return scrambledString;
 	}
 
-	public static void setScrambledString(String scrambledString) {
+	public void setScrambledString(String scrambledString) {
 		//ScrambleView.scrambledString = ScrambleController.scrambleString(scrambledString);
 	}
 }

@@ -46,18 +46,21 @@ public class StartupView extends Stage {
 	}
 
 	private void initBegin() {
+		System.out.println("Initializing begin button");
 		beginButton = new Button("Begin Game");
 		grid.add(beginButton, 1, 3);
+	}
 
-		beginButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				StartupController.startGame();
-			}
-		});
+	public Button getBeginButton() {
+		return beginButton;
+	}
+
+	protected void setBeginButton(Button beginButton) {
+		StartupView.beginButton = beginButton;
 	}
 
 	private void initDifficultyDropdown() {
+		System.out.println("Initializing difficulty dropdown");
 		addDifficulties();
 		difficultyDropdown = new ComboBox<Difficulty>();
 		difficultyDropdown.getItems().addAll(difficultyList);
@@ -65,17 +68,20 @@ public class StartupView extends Stage {
 	}
 
 	private void initDifficultyLabel() {
+		System.out.println("Initializing difficulty label");
 		difficultyLabel = new Label("Select Difficulty:");
 		grid.add(difficultyLabel, 0, 2);
 	}
 
 	private void initUserText() {
+		System.out.println("Initializing user text field");
 		userTextField = new TextField();
 		userTextField.setMaxWidth(50);
 		grid.add(userTextField, 1, 1);
 	}
 
 	private void initIntials() {
+		System.out.println("Initializing initials label");
 		initialsLabel = new Label("Enter your initials:");
 		grid.add(initialsLabel, 0, 1);
 	}

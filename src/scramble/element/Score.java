@@ -30,6 +30,11 @@ public class Score {
 		this.user = user;
 	}
 	
+	@Override
+	public String toString() {
+		return points.toString();
+	}
+	
 	
 
 }

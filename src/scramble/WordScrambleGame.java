@@ -36,5 +36,9 @@ public class WordScrambleGame extends Application {
 	public static void changeScene(Scene scene) {
 		WordScrambleGame.primaryStage.setScene(scene);
 	}
+	
+	public static Stage getPrimaryStage() {
+		return primaryStage;
+	}
 }
 
