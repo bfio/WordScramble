@@ -1,5 +1,13 @@
-computer
-programming
-database
 code
-object
+class
+type
+house
+mouse
+click
+beep
+care
+rake
+leaf
+horse
+kitten
+mall

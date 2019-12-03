@@ -1,6 +1,7 @@
 package scramble.model;
 
 import java.io.File;
+import java.util.List;
 
 import scramble.element.Difficulty;
 import scramble.element.Score;
@@ -11,12 +12,12 @@ public class ScrambleModel {
 	private static Score currentScore;
 	private static User currentUser;
 	private static Difficulty currentDifficulty;
-	private static File currentDatabase;
+	private static List<String> currentScrambleList;
 	private static int currentTime;
+	private static int currentIteration = 0;
 	
 	public ScrambleModel() {
-		this.currentUser = null;
-		this.currentScore = new Score(this.currentUser, 0);
+		ScrambleModel.currentScore = new Score(ScrambleModel.currentUser, 0);
 	}
 	
 	public static Score getCurrentScore() {
@@ -37,13 +38,12 @@ public class ScrambleModel {
 		System.out.println("Setting current user: " + currentUser.toString());
 	}
 
-	public static File getCurrentDatabase() {
-		return currentDatabase;
+	public static List<String> getCurrentScrambleList() {
+		return currentScrambleList;
 	}
 
-	public void setCurrentDatabase(File currentDatabase) {
-		ScrambleModel.currentDatabase = currentDatabase;
-		System.out.println("Setting current database: " + currentDatabase.getName());
+	public static void setCurrentScrambleList(List<String> currentScrambleList) {
+		ScrambleModel.currentScrambleList = currentScrambleList;
 	}
 
 	public static Difficulty getCurrentDifficulty() {
@@ -61,6 +61,14 @@ public class ScrambleModel {
 
 	public static void setCurrentTime(int currentTime) {
 		ScrambleModel.currentTime = currentTime;
+	}
+
+	public static int getCurrentIteration() {
+		return currentIteration;
+	}
+
+	public static void setCurrentIteration(int currentIteration) {
+		ScrambleModel.currentIteration = currentIteration;
 	}
 
 }

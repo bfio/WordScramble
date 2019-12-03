@@ -22,7 +22,7 @@ public class ScrambleView extends Stage {
 	private static Label score;
 	private static Label scrambled;
 	private static String scrambledString;
-	private static Node input;
+	private static TextField input;
 	private static Button finishGameButton;
 	private static GridPane grid;
 
@@ -56,13 +56,21 @@ public class ScrambleView extends Stage {
 	}
 	
 	public void replaceInput() {
-		input = new Label("Game over!");
+		input = new TextField("Game over!");
+		input.setOnAction(null);
 		grid.add(input, 1, 3);
 	}
 
 	private void initScrambled() {
 		System.out.println("Initializing scrambled phrase");
-		scrambled = new Label("Scrambled");
+		scrambled = new Label();
+		scrambled.setPrefWidth(100);
+		scrambled.setAlignment(Pos.CENTER);
+		grid.add(scrambled, 1, 1);
+	}
+	
+	public void replaceScrambled(String replaced) {
+		scrambled = new Label(replaced);
 		scrambled.setPrefWidth(100);
 		scrambled.setAlignment(Pos.CENTER);
 		grid.add(scrambled, 1, 1);
@@ -121,11 +129,11 @@ public class ScrambleView extends Stage {
 		ScrambleView.scrambled = scrambled;
 	}
 
-	public Node getInput() {
+	public TextField getInput() {
 		return input;
 	}
 
-	public void setInput(Node input) {
+	public void setInput(TextField input) {
 		ScrambleView.input = input;
 	}
 

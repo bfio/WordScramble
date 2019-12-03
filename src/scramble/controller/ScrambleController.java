@@ -14,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import scramble.Scrambler;
 import scramble.WordScrambleGame;
+import scramble.DAO.DatabaseDAO;
 import scramble.DAO.ScoreDAO;
 import scramble.element.Score;
 import scramble.model.ScrambleModel;
@@ -31,7 +32,22 @@ public class ScrambleController implements Scrambler {
 		initializeScore();
 		initializeInput();
 		initializeFinish();
+		initializeScrambledList();
+		initializeScrambled();
 		runTimer();
+	}
+
+	private void initializeScrambled() {
+		scrambleView.getGrid().getChildren().remove(scrambleView.getScrambled());
+		scrambleView.replaceScrambled(ScrambleModel.getCurrentScrambleList().get(ScrambleModel.getCurrentIteration()));;
+	}
+
+	private void initializeScrambledList() {
+		try {
+			ScrambleModel.setCurrentScrambleList(new DatabaseDAO(scrambleModel).retrieveScrambleList());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void initializeFinish() {
@@ -57,6 +73,9 @@ public class ScrambleController implements Scrambler {
 		
 		if (input.equals(correct)) {
 			updateScore(input);
+			ScrambleModel.setCurrentIteration(ScrambleModel.getCurrentIteration() + 1);
+			scrambleView.getGrid().getChildren().remove(scrambleView.getScrambled());
+			scrambleView.replaceScrambled(ScrambleModel.getCurrentScrambleList().get(ScrambleModel.getCurrentIteration()));
 		} else {
 			//Handle incorrect input
 		}
@@ -94,7 +113,7 @@ public class ScrambleController implements Scrambler {
 		scrambleView.getInput().setOnKeyPressed((final KeyEvent keyEvent) -> {
 			if (keyEvent.getCode() == KeyCode.ENTER) {
 				System.out.println("Checking input");
-				checkInput(((TextField) scrambleView.getInput()).getText(), scrambleView.getScrambled().getText());
+				checkInput(scrambleView.getInput().getText(), scrambleView.getScrambled().getText());
 				((TextInputControl) scrambleView.getInput()).clear();
 			}
 		});
@@ -120,6 +139,8 @@ public class ScrambleController implements Scrambler {
 		}
 		}
 	}
+	
+	
 
 	public void runTimer() {
 		initializeStartingTime();
@@ -134,7 +155,7 @@ public class ScrambleController implements Scrambler {
 			scrambleView.getGrid().getChildren().add(scrambleView.getTimer());
 			ScrambleModel.setCurrentTime(ScrambleModel.getCurrentTime() - 1);
 			
-			if (scrambleModel.getCurrentTime() < 0) {
+			if (ScrambleModel.getCurrentTime() < 0) {
 				scrambleView.getGrid().getChildren().remove(scrambleView.getInput());
 				scrambleView.replaceInput();
 				//scrambleView.getGrid().getChildren().add(scrambleView.getInput());
@@ -144,16 +165,8 @@ public class ScrambleController implements Scrambler {
 		timeline.play();
 	}
 
-	public String scrambleString(String scrambledString) {
-		return Scrambler.scrambleWord(scrambledString);
-	}
-
 	public ScrambleView getScrambleView() {
 		return scrambleView;
-	}
-
-	public void setScrambleView(ScrambleView scrambleView) {
-		this.scrambleView = scrambleView;
 	}
 
 

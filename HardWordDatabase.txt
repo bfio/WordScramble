@@ -1,5 +1,16 @@
 computer
 programming
 database
-code
+singleton
 object
+abstraction
+encapsulation
+inheritance
+inherit
+balance
+scramble
+implement
+extension
+enterprise
+resource
+planning
