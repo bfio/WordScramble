@@ -5,12 +5,7 @@ public class User {
 	private String initials;
 	
 	public User(String initials) {
-		this.initials = initials.substring(0, 3);
-		/*
-		this.initials[0] = initials[0];
-		this.initials[1] = initials[1];
-		this.initials[2] = initials[2];
-		*/
+		this.initials = initials.substring(0, 3).toUpperCase();
 	}
 
 	protected String getInitials() {
@@ -23,6 +18,11 @@ public class User {
 	
 	public String getInitialsString() {
 		return this.initials.toString().toUpperCase();
+	}
+	
+	@Override
+	public String toString() {
+		return this.initials.substring(0, 3);
 	}
 	
 	

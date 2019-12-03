@@ -1,7 +1,5 @@
 package scramble.element;
 
-import scramble.WordScrambleGame;
-
 public class Score {
 	
 	private User user;
@@ -10,10 +8,6 @@ public class Score {
 	public Score(User user, Integer points) {
 		this.user = user;
 		this.points = points;
-	}
-	
-	public Score(Integer points) {
-		this(WordScrambleGame.getCurrentUser(), points);
 	}
 
 	public Integer getPoints() {
@@ -26,6 +20,19 @@ public class Score {
 	
 	public void addPoints(Integer toAdd) {
 		this.setPoints(this.getPoints() + toAdd);;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	@Override
+	public String toString() {
+		return points.toString();
 	}
 	
 	
