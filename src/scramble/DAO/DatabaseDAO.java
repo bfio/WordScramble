@@ -17,8 +17,12 @@ public class DatabaseDAO {
 
 	private static File wordsDatabase;
 
+	/**
+	 * Constructor for DatabaseDAO which considers selected difficulty
+	 * @param scrambleModel
+	 */
 	public DatabaseDAO(ScrambleModel scrambleModel) {
-		switch (scrambleModel.getCurrentDifficulty()) {
+		switch (ScrambleModel.getCurrentDifficulty()) {
 		case EASY: {
 			DatabaseDAO.wordsDatabase = new File("EasyWordDatabase.txt");
 			break;
@@ -38,6 +42,11 @@ public class DatabaseDAO {
 		}
 	}
 
+	/**
+	 * Retrieves list of scrambled words
+	 * @return Shuffled list of words
+	 * @throws IOException thrown if words database cannot be found
+	 */
 	public ArrayList<String> retrieveScrambleList() throws IOException {
 		try {
 			ArrayList<String> scrambleList = new ArrayList<String>();

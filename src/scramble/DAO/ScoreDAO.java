@@ -17,6 +17,11 @@ public class ScoreDAO {
 
 	private final static File scoresDatabase = new File("ScoresDatabase.txt");
 
+	/**
+	 * Writes a score to the final database for scores
+	 * @param score Score to be written
+	 * @throws IOException Thrown if scores database cannot be found
+	 */
 	public void writeScore(Score score) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(scoresDatabase, true));
 		try {
@@ -28,6 +33,11 @@ public class ScoreDAO {
 		}
 	}
 	
+	/**
+	 * Reads in all the scores and user info from the scores database
+	 * @return List of read in scores
+	 * @throws IOException Thrown if scores database cannot be found
+	 */
 	public List<Score> readScores() throws IOException {
 		ArrayList<Score> scoresArrayList = new ArrayList<Score>();
 		try {
@@ -42,10 +52,8 @@ public class ScoreDAO {
 		} catch (IOException e) {
 			throw new IOException("Error with files found");
 		}
-		
 		List<Score> scoresList = scoresArrayList.subList(0, scoresArrayList.size());
 		Collections.sort(scoresList);
-		
 		return scoresList;
 	}
 

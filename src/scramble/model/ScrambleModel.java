@@ -1,6 +1,5 @@
 package scramble.model;
 
-import java.io.File;
 import java.util.List;
 
 import scramble.element.Difficulty;
@@ -16,6 +15,9 @@ public class ScrambleModel {
 	private static int currentTime;
 	private static int currentIteration = 0;
 	
+	/**
+	 * Constructor for the model that stores the application's accessible data
+	 */
 	public ScrambleModel() {
 		ScrambleModel.currentScore = new Score(ScrambleModel.currentUser, 0);
 	}

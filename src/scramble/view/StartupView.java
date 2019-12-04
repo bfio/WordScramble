@@ -29,6 +29,9 @@ public class StartupView extends Stage {
 	private static GridPane grid;
 	private static Button beginButton;
 
+	/**
+	 * Constructor for view at the start of the game
+	 */
 	public StartupView() {
 		initGrid();
 		initIntials();
@@ -43,20 +46,18 @@ public class StartupView extends Stage {
 		super.setScene(scene);
 	}
 
+	/**
+	 * Initializes the begin button that starts the game
+	 */
 	private void initBegin() {
 		System.out.println("Initializing begin button");
 		beginButton = new Button("Begin Game");
 		grid.add(beginButton, 1, 3);
 	}
-
-	public Button getBeginButton() {
-		return beginButton;
-	}
-
-	protected void setBeginButton(Button beginButton) {
-		StartupView.beginButton = beginButton;
-	}
-
+	
+	/**
+	 * Initializes the dropdown for difficulty selection
+	 */
 	private void initDifficultyDropdown() {
 		System.out.println("Initializing difficulty dropdown");
 		addDifficulties();
@@ -65,12 +66,18 @@ public class StartupView extends Stage {
 		grid.add(difficultyDropdown, 1, 2);
 	}
 
+	/**
+	 * Initializes the difficulty label
+	 */
 	private void initDifficultyLabel() {
 		System.out.println("Initializing difficulty label");
 		difficultyLabel = new Label("Select Difficulty:");
 		grid.add(difficultyLabel, 0, 2);
 	}
 
+	/**
+	 * Initializes the input for the user's initials
+	 */
 	private void initUserText() {
 		System.out.println("Initializing user text field");
 		userTextField = new TextField();
@@ -78,12 +85,18 @@ public class StartupView extends Stage {
 		grid.add(userTextField, 1, 1);
 	}
 
+	/**
+	 * Initializes label asking for initials
+	 */
 	private void initIntials() {
 		System.out.println("Initializing initials label");
 		initialsLabel = new Label("Enter your initials:");
 		grid.add(initialsLabel, 0, 1);
 	}
 
+	/**
+	 * Initializes the grid that holds page node elements
+	 */
 	private void initGrid() {
 		grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -92,11 +105,18 @@ public class StartupView extends Stage {
 		grid.setPadding(new Insets(25, 25, 25, 25));
 	}
 
+	/**
+	 * Adds difficulties to be available to the user for selection
+	 */
 	private void addDifficulties() {
 		difficultyList = new ArrayList<Difficulty>();
 		difficultyList.add(Difficulty.EASY);
 		difficultyList.add(Difficulty.MEDIUM);
 		difficultyList.add(Difficulty.HARD);
+	}
+	
+	public Button getBeginButton() {
+		return beginButton;
 	}
 
 	public TextField getUserTextField() {

@@ -2,18 +2,13 @@ package scramble.view;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import scramble.Scrambler;
 import scramble.WordScrambleGame;
 import scramble.model.ScrambleModel;
 
@@ -27,6 +22,9 @@ public class ScrambleView extends Stage {
 	private static Button finishGameButton;
 	private static GridPane grid;
 
+	/**
+	 * Constructor for the view used for the game
+	 */
 	public ScrambleView() {
 		WordScrambleGame.getPrimaryStage().setTitle("Word Scramble");
 		initGrid();
@@ -41,6 +39,9 @@ public class ScrambleView extends Stage {
 		super.setScene(scene);
 	}
 
+	/**
+	 * Initializes the button to finish the game
+	 */
 	private void initFinish() {
 		System.out.println("Initializing finish button");
 		finishGameButton = new Button("Finish game");
@@ -50,18 +51,27 @@ public class ScrambleView extends Stage {
 		grid.add(hbBtn, 1, 4);
 	}
 
+	/**
+	 * Initializes the user input text field
+	 */
 	private void initInput() {
 		System.out.println("Initializing input");
 		input = new TextField();
 		grid.add(input, 1, 3);
 	}
 	
+	/**
+	 * Replaces the user input text field with one that displays a game over message and removes its action
+	 */
 	public void replaceInput() {
 		input = new TextField("Game over!");
 		input.setOnAction(null);
 		grid.add(input, 1, 3);
 	}
 
+	/**
+	 * Initializes the scrambled phrase displayed to the user
+	 */
 	private void initScrambled() {
 		System.out.println("Initializing scrambled phrase");
 		scrambled = new Label();
@@ -70,6 +80,10 @@ public class ScrambleView extends Stage {
 		grid.add(scrambled, 1, 1);
 	}
 	
+	/**
+	 * Replaces the scrambled phrase displayed
+	 * @param replaced New String to display
+	 */
 	public void replaceScrambled(String replaced) {
 		scrambled = new Label(replaced);
 		scrambled.setPrefWidth(100);
@@ -77,6 +91,9 @@ public class ScrambleView extends Stage {
 		grid.add(scrambled, 1, 1);
 	}
 
+	/**
+	 * Initializes the displayed score
+	 */
 	private void initScore() {
 		System.out.println("Initializing score");
 		score = new Label("Score: " + ScrambleModel.getCurrentScore().toString());
@@ -85,6 +102,9 @@ public class ScrambleView extends Stage {
 		grid.add(score, 3, 0);
 	}
 
+	/**
+	 * Initializes the grid pane that holds page nodes
+	 */
 	private void initGrid() {
 		System.out.println("Initializing grid");
 		grid = new GridPane();
@@ -94,24 +114,35 @@ public class ScrambleView extends Stage {
 		grid.setAlignment(Pos.CENTER);
 	}
 
+	/**
+	 * Retrieves the timer element
+	 * @return Timer counting down time remaining
+	 */
 	public Label getTimer() {
 		return timer;
 	}
 
+	/**
+	 * Sets the timer element
+	 * @param timer New timer label to be displayed
+	 */
 	public void setTimer(Label timer) {
 		ScrambleView.timer = timer;
 	}
-
-	public GridPane getGrid() {
-		return grid;
-	}
-
+	
+	/**
+	 * Initializes the timer element
+	 */
 	private void initTimer() {
 		System.out.println("Initializing timer");
 		timer = new Label("Timer starting!");
 		timer.setPrefWidth(100);
 		timer.setPadding(new Insets(15));
 		grid.add(timer, 0, 0);
+	}
+
+	public GridPane getGrid() {
+		return grid;
 	}
 
 	public Label getScore() {
@@ -148,9 +179,5 @@ public class ScrambleView extends Stage {
 
 	public String getScrambledString() {
 		return scrambledString;
-	}
-
-	public void setScrambledString(String scrambledString) {
-		//ScrambleView.scrambledString = ScrambleController.scrambleString(scrambledString);
 	}
 }

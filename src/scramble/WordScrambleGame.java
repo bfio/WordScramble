@@ -19,6 +19,9 @@ public class WordScrambleGame extends Application {
 		launch(args);
 	}
 
+	/**
+	 * Starts the JavaFX application
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		StartupView startupView = new StartupView();

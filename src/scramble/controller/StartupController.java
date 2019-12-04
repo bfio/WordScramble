@@ -17,22 +17,20 @@ public class StartupController {
 	private StartupView startupView;
 	private ScrambleModel scrambleModel;
 	
+	/**
+	 * Constructor for controller for starting the game
+	 * @param startupView View to be controlled
+	 * @param scrambleModel Model to manipulate data
+	 */
 	public StartupController(StartupView startupView, ScrambleModel scrambleModel) {
 		this.startupView = startupView;
 		this.scrambleModel = scrambleModel;
 		initializeBeginButton();
 	}
-	
-	public void initializeBeginButton() {
-		startupView.getBeginButton().setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				startGame();
-			}
-		});
-		System.out.println("Initializing begin button");
-	}
 
+	/**
+	 * Starts the game when startup information is completed and valid
+	 */
 	private void startGame() {
 		if ((this.startupView.getUserTextField().getLength() != 3) || (startupView.getDifficultyDropdown().getValue() == null)) {
 			Alert errorAlert = new Alert(AlertType.ERROR);
@@ -47,5 +45,18 @@ public class StartupController {
 			new ScrambleController(scrambleView, scrambleModel);
 			WordScrambleGame.changeScene(scrambleView.getScene());
 		}
+	}
+	
+	/**
+	 * Initializes button to begin the game
+	 */
+	private void initializeBeginButton() {
+		startupView.getBeginButton().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				startGame();
+			}
+		});
+		System.out.println("Initializing begin button");
 	}
 }

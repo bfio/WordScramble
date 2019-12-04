@@ -18,6 +18,9 @@ public class FinalView extends Stage {
 	private static Label finalScoreLabel;
 	private static Button newGameButton;
 
+	/**
+	 * Constructor for the game's end screen
+	 */
 	public FinalView() {
 		WordScrambleGame.getPrimaryStage().setTitle("Final Results");
 		initGrid();
@@ -33,27 +36,42 @@ public class FinalView extends Stage {
 		super.setScene(scene);
 	}
 	
+	/**
+	 * Initializes the button that starts a new game
+	 */
 	private void initNewGameButton() {
 		newGameButton = new Button("New Game");
 		newGameButton.setAlignment(Pos.CENTER);
 		grid.add(newGameButton, 0, 4, 2, 2);
 	}
 
+	/**
+	 * Initializes the label that displays the final score
+	 */
 	private void initFinalScoreLabel() {
 		finalScoreLabel = new Label("Final Score: " + ScrambleModel.getCurrentScore().toString());
 		grid.add(finalScoreLabel, 0, 2);
 	}
 
+	/**
+	 * Initializes the label that displays the game's difficulty
+	 */
 	private void initDifficultyLabel() {
 		difficultyLabel = new Label("Difficulty: " + ScrambleModel.getCurrentDifficulty());
 		grid.add(difficultyLabel, 0, 1);
 	}
 
+	/**
+	 * Initializes the label that displays the user that completed the game
+	 */
 	private void initUserLabel() {
 		userLabel = new Label("User: " + ScrambleModel.getCurrentUser().toString());
 		grid.add(userLabel, 0, 0);
 	}
 	
+	/**
+	 * Intializes the leaderboard placeholders. Currently deprecated, not fully implemented.
+	 */
 	@Deprecated
 	private void initLeaderboard() {
 		Label leaderboard = new Label("Leaderboard");
@@ -66,6 +84,9 @@ public class FinalView extends Stage {
 		grid.add(leaderC, 2, 3);
 	}
 
+	/**
+	 * Initializes the grid pane that holds node elements
+	 */
 	private void initGrid() {
 		grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -74,6 +95,10 @@ public class FinalView extends Stage {
 		grid.setPadding(new Insets(25, 25, 25, 25));
 	}
 	
+	/**
+	 * Retrieves the new game button
+	 * @return New game button
+	 */
 	public Button getNewGameButton() {
 		return newGameButton;
 	}

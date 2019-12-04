@@ -8,6 +8,11 @@ public enum Difficulty {
 	private String name;
 	private String description;
 	
+	/**
+	 * Constructor for Difficulty
+	 * @param name Short name for difficulty setting
+	 * @param description Detailed explanation of difficulty
+	 */
 	Difficulty(String name, String description) {
 		this.name = name;
 		this.description = description;
